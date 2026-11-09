@@ -1,0 +1,2 @@
+SAUCE V1 PRO - source package revision 1.1
+Not a precompiled VST3. Compile on Windows using BUILD_SAUCE.bat.
