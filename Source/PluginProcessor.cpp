@@ -231,4 +231,5 @@ void SauceAudioProcessor::setStateInformation(const void* data, int size)
     if (xml && xml->hasTagName(parameters.state.getType()))
         parameters.replaceState(juce::ValueTree::fromXml(*xml));
 }
+juce::AudioProcessorEditor* SauceAudioProcessor::createEditor() { return new SauceAudioProcessorEditor(*this); }
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new SauceAudioProcessor(); }
