@@ -27,6 +27,8 @@ juce_add_plugin(SAUCE
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
     COPY_PLUGIN_AFTER_BUILD FALSE)
 
+juce_generate_juce_header(SAUCE)
+
 target_sources(SAUCE PRIVATE
     Source/PluginProcessor.cpp
     Source/PluginEditor.cpp)
