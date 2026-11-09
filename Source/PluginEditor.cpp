@@ -37,14 +37,15 @@ SauceAudioProcessorEditor::SauceAudioProcessorEditor(SauceAudioProcessor& p)
     preset.setSelectedId(1);
     preset.onChange = [this] { processor.setPreset(preset.getSelectedId()-1); };
     oversampling.addItemList({"1x","2x","4x","8x"},1);
-    for (auto* b : {&advanced,&enabled,&autoGain,&prev,&next,&abButton}) {
+    for (juce::Button* b : std::initializer_list<juce::Button*>{&advanced,&enabled,&autoGain,&prev,&next,&abButton}) {
         b->setColour(juce::TextButton::buttonColourId,juce::Colour(0xff281638));
         b->setColour(juce::TextButton::textColourOffId,juce::Colour(0xfff8f7ff));
         addAndMakeVisible(*b);
     }
     advanced.onClick=[this]{showAdvanced=!showAdvanced; resized();};
     prev.onClick=[this]{int id=juce::jmax(1,preset.getSelectedId()-1);preset.setSelectedId(id);};
-    next.onClick=[this]{int id=juce::jmin(8,preset.getSelectedId()+1);preset.setSelectedId(id);};\n    abButton.onClick=[this]{processor.toggleAB(); abButton.setButtonText(processor.isB() ? "B" : "A/B");};
+    next.onClick=[this]{int id=juce::jmin(8,preset.getSelectedId()+1);preset.setSelectedId(id);};
+    abButton.onClick=[this]{processor.toggleAB(); abButton.setButtonText(processor.isB() ? "B" : "A/B");};
     for (auto* c : {&title,&percent,&inputLabel,&outputLabel}) {
         c->setColour(juce::Label::textColourId,juce::Colour(0xfff8f7ff));
         addAndMakeVisible(*c);
@@ -113,7 +114,7 @@ void SauceAudioProcessorEditor::resized()
         autoGain.setBounds(24,625,120,26); oversampling.setBounds(150,625,100,26);
     }
     else {
-        for(auto* c : {static_cast<juce::Component*>(&input),&output,&mix,&sub,&transient,&boost,&autoGain,&oversampling}) c->setBounds(0,0,0,0);
+        for(juce::Component* c : std::initializer_list<juce::Component*>{&input,&output,&mix,&sub,&transient,&boost,&autoGain,&oversampling}) c->setBounds(0,0,0,0);
     }
 }
 void SauceAudioProcessorEditor::timerCallback()
