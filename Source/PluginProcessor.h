@@ -46,7 +46,7 @@ private:
     std::atomic<float> inputPeak { 0.0f }, outputPeak { 0.0f };
     float envelope = 0.0f;
     double sr = 44100.0;
-    juce::AudioProcessorValueTreeState::NamedValueSet abSnapshot;
+    juce::NamedValueSet abSnapshot;
     bool activeB = false;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(SauceAudioProcessor)
